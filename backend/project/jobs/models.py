@@ -22,7 +22,38 @@ class Job(models.Model):
     date_applied = models.DateTimeField(
         verbose_name="created",
     )
-    application_state = models
+    APPLIED = 'Applied'
+    REJECTED = 'Rejected'
+    WISHLIST = 'Wishlist'
+    PHONE_INTERVIEW = 'Phone interview'
+    LIVE_INTERVIEW = 'Live interview'
+    OFFER = 'Offer'
+    state_options = (
+        (APPLIED, 'Applied'),
+        (REJECTED, 'Rejected'),
+        (WISHLIST, 'Wishlist'),
+        (PHONE_INTERVIEW, 'Phone interview'),
+        (LIVE_INTERVIEW, 'Live interview'),
+        (OFFER, 'Offer'),
+    )
+    application_state = models.CharField(
+        verbose_name="application_state",
+        max_length=20,
+        choices=state_options,
+    )
+    response = models.TextField(
+        verbose_name='response',
+    )
+    response_date = models.DateTimeField(
+        verbose_name='response_date',
+    )
+    comments = models.TextField(
+        verbose_name='comments'
+    )
+
+    class Meta:
+        verbose_name = "Job description"
+        ordering = ["date_applied"]
 
     def __str__(self):
         return f'{self.name}'
