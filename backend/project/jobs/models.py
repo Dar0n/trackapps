@@ -19,8 +19,10 @@ class Job(models.Model):
         max_length=100,
         blank=True,
     )
-    date_applied = models.DateTimeField(
-        verbose_name="created",
+    date_applied = models.DateField(
+        verbose_name="applied",
+        null=True,
+        blank=True,
     )
     APPLIED = 'Applied'
     REJECTED = 'Rejected'
@@ -43,12 +45,16 @@ class Job(models.Model):
     )
     response = models.TextField(
         verbose_name='response',
+        blank=True,
     )
-    response_date = models.DateTimeField(
+    response_date = models.DateField(
         verbose_name='response_date',
+        null=True,
+        blank=True,
     )
     comments = models.TextField(
-        verbose_name='comments'
+        verbose_name='comments',
+        blank=True,
     )
 
     class Meta:
@@ -56,4 +62,4 @@ class Job(models.Model):
         ordering = ["date_applied"]
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.title}'
