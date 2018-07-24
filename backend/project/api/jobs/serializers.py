@@ -7,7 +7,7 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ['user_profile', 'title', 'company', 'date_applied',
+        fields = ['id', 'user_profile', 'title', 'company', 'date_applied',
                   'application_state', 'response', 'response_date', 'comments']
 
     def create(self, validated_data):
