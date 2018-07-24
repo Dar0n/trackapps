@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +25,12 @@ SECRET_KEY = 'jrgv%*o+t@t=5sr0sdp_wbx%6oac7urs41it2b*v_&)mmns=mh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEFAULT_FROM_EMAIL='students@propulsionacademy.com'
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='students@propulsionacademy.com'
+EMAIL_HOST_PASSWORD='VNZ4NVUTa8LM{i38{zCGjCG6ewjaNnR8Njhph@Rf'
+EMAIL_PORT=587
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -141,7 +147,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=500),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=600),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=30),
 }

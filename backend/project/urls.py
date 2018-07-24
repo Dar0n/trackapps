@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [
+mypatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('project.api.auth.urls', namespace='auth'))
+    path('api/', include('project.api.urls', namespace='api')),
+]
+
+urlpatterns = [
+    path('backend/', include(mypatterns)),
 ]
