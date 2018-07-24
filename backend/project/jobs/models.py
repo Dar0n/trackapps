@@ -46,7 +46,7 @@ class Job(models.Model):
     response = models.TextField(
         verbose_name='response',
         blank=True,
-        null=True,
+        default=''
     )
     response_date = models.DateField(
         verbose_name='response_date',
@@ -56,7 +56,7 @@ class Job(models.Model):
     comments = models.TextField(
         verbose_name='comments',
         blank=True,
-        null=True,
+        default=''
     )
 
     class Meta:
