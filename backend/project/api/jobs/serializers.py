@@ -14,7 +14,7 @@ class JobSerializer(serializers.ModelSerializer):
 
         job = Job.objects.create(
             # **validated_data,
-            user_profile=validated_data.get("user_profile"),
+            user_profile=self.context['request'].user.user_profile,
             title=validated_data.get("title"),
             company=validated_data.get("company"),
             date_applied=validated_data.get("date_applied"),
