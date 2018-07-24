@@ -11,6 +11,12 @@ class RegistrationSerializer(serializers.Serializer):
     email = serializers.EmailField(
         label="E-Mail address"
     )
+    first_name = serializers.CharField(
+        label="First name"
+    )
+    last_name = serializers.CharField(
+        label="First name"
+    )
 
     def validate_email(self, value):
         try:
@@ -33,10 +39,12 @@ class RegistrationSerializer(serializers.Serializer):
         )
         message.send()
 
-    def register_user(self, email):
+    def register_user(self, email, first_name, last_name):
         new_user = User.objects.create_user(
             username=email,
             email=email,
+            first_name = first_name,
+            last_name = last_name,
             is_active=False
         )
         self.send_registration_email(
@@ -74,7 +82,7 @@ class RegistrationValidationSerializer(serializers.Serializer):
             )
         except User.DoesNotExist:
             raise serializers.ValidationError(
-                'You have registered with different email!'
+                'You have already activated your account or registered with a different email!'
             )
 
     def validate(self, data):

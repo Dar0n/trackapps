@@ -14,7 +14,9 @@ class RegistrationView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         new_user = serializer.register_user(
-            email=serializer.validated_data.get("email"))
+            email=serializer.validated_data.get("email"),
+            first_name=serializer.validated_data.get('first_name'),
+            last_name=serializer.validated_data.get('last_name'))
         return Response(self.output_serializer_class(new_user).data)
 
 
