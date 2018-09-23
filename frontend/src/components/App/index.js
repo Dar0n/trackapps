@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MainNav from '../MainNav';
-import Applications from '../Applications';
+import ApplicationsContainer from '../ApplicationsContainer';
 import { Route } from 'react-router-dom';
 import './style.css';
 
@@ -10,9 +10,8 @@ class App extends Component {
         <div>
           <MainNav />
           <main>
-            
+            <Route exact path="/" component={ApplicationsContainer}/>
           </main>
-          <Route exact path="/" component={Applications}/>
         </div>
     );
   }

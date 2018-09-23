@@ -1,0 +1,36 @@
+.applications-nav, .applications-navbuttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.applications__navbutton, .applications__searchline {
+  width: 150px;
+  height: 35px;
+  border: 2px solid rgba(102, 102, 102, 0.5);
+  background-color: #fff;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #555;
+  margin: 0 8px;
+}
+
+.applications__navbutton {
+  cursor: pointer;
+}
+
+.applications__navbutton:hover {
+  transform: scale(1.02);
+}
+
+.applications__navbutton--new-application {
+  background-color: #FD974F;
+}
+
+.applications__searchline {
+  outline: none;
+  padding: 0 10px;
+  width: 250px;
+}

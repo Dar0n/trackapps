@@ -1,0 +1,28 @@
+.applications__filter-list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 5%;
+}
+
+.applications__filter-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+.applications__filter__li {
+  margin: 0 10px;
+  color: #805A3B;
+  cursor: pointer;
+}
+
+.applications__filter__li--active {
+  color: #FD974F;
+}
+
+.applications__filter__sortby {
+  color: #C60000;
+  cursor: text;
+}
