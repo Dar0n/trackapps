@@ -1,0 +1,26 @@
+.single-application-container {
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  border-radius: 7px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #805A3B;
+}
+
+.single-application__comment {
+  grid-column: 1/3;
+}
+
+.single-application__form-field {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-application__form-firld-title {
+  color: #bbb;
+  font-weight: 100;
+  margin: 10px 0;
+  font-size: 10pt;
+}

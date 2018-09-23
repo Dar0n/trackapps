@@ -8,33 +8,34 @@ export default class ApplictionsDashboard extends Component {
       applications: [
         {
           user_profile: 1,
-          title: 'Front-end developer',
           company: 'Ginetta',
+          title: 'Front-end developer',
           date_applied: '15.09.2018',
           application_state: 'Phone interview',
-          response: 'Invited to the phone interview',
           response_date: '21.09.2018',
-          comments: 'Will be waiting for feedback after phone interview',
+          response: 'Invited to the phone interview',
+          comment: 'Will be waiting for feedback after phone interview',
         },
         {
           user_profile: 1,
-          title: 'Full-stack developer',
           company: 'Homegate',
+          title: 'Full-stack developer',
           date_applied: '23.09.2018',
           application_state: 'Applied',
-          response: 'no response',
           response_date: '',
-          comments: '',
+          response: 'no response',
+          comment: '',
         },
       ]
     }
   }
   render() {
+    const rand = require("random-key");
     return (
       <div className='applications-dashboard-container'>
         {
           this.state.applications.map(application => {
-            return <Application application={application} />;
+            return <Application key={rand.generate(10)} application={application} />;
           })
         }
       </div>
