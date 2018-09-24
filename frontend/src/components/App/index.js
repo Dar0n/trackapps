@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MainNav from '../MainNav';
 import ApplicationsContainer from '../ApplicationsContainer';
-import { Route } from 'react-router-dom';
+import NewApplication from '../NewApplication';
+import { Switch, Route } from 'react-router-dom';
 import './style.css';
 
 class App extends Component {
@@ -10,7 +11,10 @@ class App extends Component {
         <div>
           <MainNav />
           <main>
-            <Route exact path="/" component={ApplicationsContainer}/>
+            <Switch>
+              <Route exact path="/" component={ApplicationsContainer}/>
+              <Route path='/new-application' component={NewApplication} />
+            </Switch>
           </main>
         </div>
     );
