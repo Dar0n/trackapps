@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../../actions/setCurrentUser';
 import './style.css';
 
-export default class Login extends Component {
+const mapStateToProps = (state) => {
+  return {};
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (state) => dispatch(setCurrentUser(state)),
+})
+
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
     };
   }
@@ -15,21 +25,26 @@ export default class Login extends Component {
     const newState = Object.assign({}, this.state, {[key]: value});
     this.setState(newState);
   }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(this.props);
+    this.props.setCurrentUser(this.state);
+  }
   render() {
     return (
       <div>
         <form className='login-form' onSubmit={this.handleSubmit}>
           <h2 className='login-form__title'>Login</h2>
           <div className='login-form__field-container'>
-            <label htmlFor="email">Enter your email: </label>
+            <label htmlFor="username">Enter your email: </label>
             <input 
               onChange={this.handleChange} 
               value={this.state.email} 
               type="text" 
-              name="email" 
-              id="email" 
+              name="username" 
+              id="username" 
               required 
-              autoComplete="email"
+              autoComplete="username"
             />
           </div>
           <div className='login-form__field-container'>
@@ -50,3 +65,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
