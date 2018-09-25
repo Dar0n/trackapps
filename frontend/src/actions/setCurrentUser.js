@@ -1,7 +1,7 @@
 import { setTokensToLocalStorage } from '../helpers/setTokensToLocalStorage';
 import { SET_TOKEN } from '../constants';
 
-export const setCurrentUser = (state) => (dispatch, getState) => {
+export const setCurrentUser = (state, push) => (dispatch, getState) => {
   // console.log(state);
   const method = 'POST';
   const body = JSON.stringify(state);
@@ -13,7 +13,6 @@ export const setCurrentUser = (state) => (dispatch, getState) => {
     body,
     headers,
   }
-  // Next clause should not happen due to 'required' flag on both input fields
   if (!state.username || !state.password) {
     return undefined;
   }
@@ -30,6 +29,7 @@ export const setCurrentUser = (state) => (dispatch, getState) => {
         // console.log(data);
         setTokensToLocalStorage(data);
         dispatch(setToken(data));
+        push('/');
       }
     })
 }
