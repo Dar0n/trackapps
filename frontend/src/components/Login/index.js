@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../../actions/setCurrentUser';
+import { login } from '../../actions/login';
 import { withRouter } from 'react-router-dom'
 import './style.css';
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (state, pushFunction) => dispatch(setCurrentUser(state, pushFunction)),
+  login: (state, pushFunction) => dispatch(login(state, pushFunction)),
 })
 
 class Login extends Component {
@@ -29,7 +29,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log(this.props.history.push);
-    this.props.setCurrentUser(this.state, this.props.history.push);
+    this.props.login(this.state, this.props.history.push);
   }
   render() {
     return (

@@ -1,7 +1,7 @@
 import { setTokensToLocalStorage } from '../helpers/setTokensToLocalStorage';
 import { SET_TOKEN } from '../constants';
 
-export const setCurrentUser = (state, push) => (dispatch, getState) => {
+export const login = (state, push) => (dispatch, getState) => {
   // console.log(state);
   const method = 'POST';
   const body = JSON.stringify(state);
