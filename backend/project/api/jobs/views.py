@@ -47,10 +47,11 @@ class GetUpdateDeleteJobView(GenericAPIView):
 
 class GetListOfJobsView(APIView):
     permission_classes = [
-        IsAuthenticated,
+        # IsAuthenticated,
     ]
 
     def get(self, request):
-        jobs = Job.objects.filter(user_profile=request.user.user_profile)
+        # jobs = Job.objects.filter(user_profile=request.user.user_profile)
+        jobs = Job.objects.all()
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data)
