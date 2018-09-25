@@ -1,5 +1,5 @@
 import { setTokensToLocalStorage } from '../helpers/setTokensToLocalStorage';
-import { SET_TOKEN } from '../constants';
+import { USER_LOGIN } from '../constants';
 
 export const login = (state, push) => (dispatch, getState) => {
   // console.log(state);
@@ -36,7 +36,7 @@ export const login = (state, push) => (dispatch, getState) => {
 
 const setToken = ({token}) => {
   return {
-    type: SET_TOKEN,
+    type: USER_LOGIN,
     payload: token,
   }
 }

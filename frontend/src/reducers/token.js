@@ -1,8 +1,8 @@
-import { SET_TOKEN } from '../constants';
+import { USER_LOGIN } from '../constants';
 
 export const token = (state='', action) => {
   switch (action.type) {
-    case SET_TOKEN:
+    case USER_LOGIN:
       return action.payload;
     default:
       return state;
