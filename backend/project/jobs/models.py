@@ -43,15 +43,15 @@ class Job(models.Model):
         max_length=20,
         choices=state_options,
     )
-    response = models.TextField(
-        verbose_name='response',
-        blank=True,
-        default=''
-    )
     response_date = models.DateField(
         verbose_name='response_date',
         null=True,
         blank=True,
+    )
+    response = models.TextField(
+        verbose_name='response',
+        blank=True,
+        default=''
     )
     comments = models.TextField(
         verbose_name='comments',

@@ -10,12 +10,14 @@ class App extends Component {
   render() {
     return (
         <div>
-          <MainNav />
+          {/* <MainNav /> */}
           <main>
             <Switch>
-              <Route exact path="/" component={ApplicationsContainer}/>
               <Route path="/login" component={Login}/>
-              <Route path='/new-application' component={NewApplication} />
+              <MainNav>
+                <Route exact path="/" component={ApplicationsContainer}/>
+                <Route path='/new-application' component={NewApplication} />
+              </MainNav>
             </Switch>
           </main>
         </div>

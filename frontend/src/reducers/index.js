@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { token } from './token';
+import { applications } from './applications';
 
 const appReducer = combineReducers({
   token,
+  applications,
 })
 
 const rootReducer = (state, action) => {

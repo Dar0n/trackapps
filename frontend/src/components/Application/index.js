@@ -7,22 +7,36 @@ class Application extends Component{
   }
   render() {
   const { application } = this.props;
-  const rand = require("random-key");
   return (
     <div className='single-application-container'>
-      {
-        Object.keys(application).map(key => {
-          if (key !== 'user_profile') {
-            return (
-              <div key={rand.generate(10)} className={`single-application__form-field single-application__${key}`}>
-                <span className='single-application__form-firld-title'>{this.capitalize(key)}</span>
-                {application[key]}
-              </div>
-            )
-          }
-          return null;
-        })
-      }
+      <div className={`single-application__form-field single-application__company`}>
+        <span className='single-application__form-field-title'>Company</span>
+        {application['company']}
+      </div>
+      <div className={`single-application__form-field single-application__title`}>
+        <span className='single-application__form-field-title'>Job title</span>
+        {application['title']}
+      </div>
+      <div className={`single-application__form-field single-application__date_applied`}>
+        <span className='single-application__form-field-title'>Application date</span>
+        {application['date_applied']}
+      </div>
+      <div className={`single-application__form-field single-application__application_state`}>
+        <span className='single-application__form-field-title'>Application state</span>
+        {application['application_state']}
+      </div>
+      <div className={`single-application__form-field single-application__response_date`}>
+        <span className='single-application__form-field-title'>Response date</span>
+        {application['response_date']}
+      </div>
+      <div className={`single-application__form-field single-application__response`}>
+        <span className='single-application__form-field-title'>Response</span>
+        {application['response']}
+      </div>
+      <div className={`single-application__form-field single-application__comment`}>
+        <span className='single-application__form-field-title'>Comment</span>
+        {application['comment']}
+      </div>
     </div>
   )
   }

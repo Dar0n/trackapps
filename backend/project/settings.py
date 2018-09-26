@@ -154,6 +154,6 @@ STATIC_URL = '/static/'
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=30),
-    'JWT_EXPIRATION_DELTA': timedelta(hours=12),
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=1),
 
 }
