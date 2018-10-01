@@ -5,6 +5,7 @@ import { sendNewApplication } from '../../actions/sendNewApplication';
 import { withRouter } from 'react-router-dom';
 import { removeEmptyProperties } from '../../helpers/removeEmptyProperties';
 import './style.css';
+import { checkIfLoggedIn } from '../../helpers/checkIfLoggedIn';
 
 const mapStateToProps = (state) => {
   return {};
@@ -38,8 +39,15 @@ class NewApplication extends Component {
   async submitAction(e) {
     e.preventDefault();
     const newState = removeEmptyProperties(this.state, 'date_applied', 'response_date');
-    await this.props.sendNewApplication(newState);
-    this.props.history.push('/');
+    const loggedIn = checkIfLoggedIn();
+    if (loggedIn) {
+      await this.props.sendNewApplication(newState);
+      this.props.history.push('/');
+    }
+    else {
+      alert('Sorry, your session has been expired. Your last application has not been added.')
+      this.props.history.push('/');
+    }
   }
   render() {
     return (
