@@ -21,11 +21,12 @@ class NewApplication extends Component {
       company: '',
       title: '',
       date_applied: '',
-      application_state: '',
+      application_state: 'Applied',
       response_date: '',
       response: '',
       comments: '',
     };
+    this.options = ['Applied', 'Rejected', 'Wishlist', 'Phone interview', 'Office interview', 'Offer']
     this.submitAction = this.submitAction.bind(this);
   }
   handleChange = (e) => {
@@ -84,14 +85,21 @@ class NewApplication extends Component {
         </div>
         <div className="new-application-form__field-container">
           <label htmlFor="application_state">Status of the application:* </label>
-          <input 
+          <select name='application_state' id='application_state' onChange={this.handleChange} >
+            {
+              this.options.map(option => {
+                return <option value={option}>{option}</option>;
+              })
+            }
+          </select>
+          {/* <input 
             onChange={this.handleChange} 
             value={this.state.application_state} 
-            type="text" 
+            type="text"
             name="application_state" 
             id="application_state" 
             required 
-          />
+          /> */}
         </div>
         <div className="new-application-form__field-container">
           <label htmlFor="response_date">Date of response: </label>

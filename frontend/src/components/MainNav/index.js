@@ -31,11 +31,12 @@ class MainNav extends Component {
     if (this.state.login_string === 'Log out') {
       this.props.logout();
       this.setState({login_string: 'Log in',})
-      return null;
+      this.props.history.push('/');
     }
     else {
-      this.props.history.push('/login')
+      this.props.history.push('/login');
     }
+    return null;
   }
   render() {
     return (
