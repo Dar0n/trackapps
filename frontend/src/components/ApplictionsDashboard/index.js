@@ -5,7 +5,12 @@ import { getJobsApplications } from '../../actions/getJobsApplications';
 
 const mapStateToProps = (state) => {
   if (state.applications.length > 0) {
-    return {applications: state.applications};
+    //filter initial applications array into two halves - one with application date and one without
+    //then we switch the two halves, so applications with date come first
+    const no_date_applied = state.applications.filter(application => !application.date_applied);
+    const with_date_applied = state.applications.filter(application => application.date_applied);
+    const newState = with_date_applied.concat(no_date_applied);
+    return {applications: newState};
   }
   return {};
 }

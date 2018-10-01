@@ -50,6 +50,7 @@ class NewApplication extends Component {
     }
   }
   render() {
+    const rand = require("random-key");
     return (
       <div className='new-application-form-container'>
         <form className='new-application-form' onSubmit={this.submitAction}>
@@ -96,7 +97,7 @@ class NewApplication extends Component {
           <select name='application_state' id='application_state' onChange={this.handleChange} >
             {
               this.options.map(option => {
-                return <option value={option}>{option}</option>;
+                return <option key={rand.generate(10)} value={option}>{option}</option>;
               })
             }
           </select>
