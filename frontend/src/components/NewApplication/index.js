@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { sendNewApplication } from '../../actions/sendNewApplication';
+import { withRouter } from 'react-router-dom';
+import { removeEmptyProperties } from '../../helpers/removeEmptyProperties';
 import './style.css';
+
+const mapStateToProps = (state) => {
+  return {};
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  sendNewApplication: (data) => dispatch(sendNewApplication(data))
+})
 
 class NewApplication extends Component {
   constructor(props) {
@@ -12,8 +24,9 @@ class NewApplication extends Component {
       application_state: '',
       response_date: '',
       response: '',
-      comment: '',
+      comments: '',
     };
+    this.submitAction = this.submitAction.bind(this);
   }
   handleChange = (e) => {
     const key = e.target.name;
@@ -21,10 +34,11 @@ class NewApplication extends Component {
     const newState = Object.assign({}, this.State, {[key]:value});
     this.setState(newState);
   }
-  submitAction = (e) => {
+  async submitAction(e) {
     e.preventDefault();
-    console.log(this.state);
-    // Here will come an action creator to send new application to the server.
+    const newState = removeEmptyProperties(this.state, 'date_applied', 'response_date');
+    await this.props.sendNewApplication(newState);
+    this.props.history.push('/');
   }
   render() {
     return (
@@ -35,7 +49,7 @@ class NewApplication extends Component {
           <input type='submit' value='Create' className='new-application-form__submit-button' />
         </div>
         <div className="new-application-form__field-container">
-          <label htmlFor="company">Enter company name: </label>
+          <label htmlFor="company">Enter company name:* </label>
           <input 
             onChange={this.handleChange} 
             value={this.state.company} 
@@ -45,7 +59,7 @@ class NewApplication extends Component {
           />
         </div>
         <div className="new-application-form__field-container">
-          <label htmlFor="title">Enter job title: </label>
+          <label htmlFor="title">Enter job title:* </label>
           <input 
             onChange={this.handleChange} 
             value={this.state.title} 
@@ -69,7 +83,7 @@ class NewApplication extends Component {
           />
         </div>
         <div className="new-application-form__field-container">
-          <label htmlFor="application_state">Status of the application: </label>
+          <label htmlFor="application_state">Status of the application:* </label>
           <input 
             onChange={this.handleChange} 
             value={this.state.application_state} 
@@ -102,14 +116,14 @@ class NewApplication extends Component {
             rows='5' 
           />
         </div>
-        <div className="new-application-form__field-container new-application-form__field-container-comment">
-          <label htmlFor="comment">Additional comment: </label>
+        <div className="new-application-form__field-container new-application-form__field-container-comments">
+          <label htmlFor="comments">Additional comments: </label>
           <textarea 
           onChange={this.handleChange} 
-          value={this.state.comment} 
+          value={this.state.comments} 
           type="text" 
-          name="comment" 
-          id="comment" 
+          name="comments" 
+          id="comments" 
           rows='5' 
         />
         </div>
@@ -119,4 +133,4 @@ class NewApplication extends Component {
   }
 }
 
-export default NewApplication;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewApplication));

@@ -53,11 +53,11 @@
   border:  2px solid rgba(102, 102, 102, 0.5);
 }
 
-.new-application-form__field-container-response, .new-application-form__field-container-comment {
+.new-application-form__field-container-response, .new-application-form__field-container-comments {
   grid-column: 1/4;
 }
 
 .new-application-form__field-container-response textarea,
-.new-application-form__field-container-comment textarea {
+.new-application-form__field-container-comments textarea {
   padding: 5px;
 }

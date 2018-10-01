@@ -8,7 +8,7 @@
   color: #805A3B;
 }
 
-.single-application__comment, .single-application__response {
+.single-application__comments, .single-application__response {
   grid-column: 1/4;
 }
 

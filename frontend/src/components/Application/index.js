@@ -33,9 +33,9 @@ class Application extends Component{
         <span className='single-application__form-field-title'>Response</span>
         {application['response']}
       </div>
-      <div className={`single-application__form-field single-application__comment`}>
-        <span className='single-application__form-field-title'>Comment</span>
-        {application['comment']}
+      <div className={`single-application__form-field single-application__comments`}>
+        <span className='single-application__form-field-title'>Comments</span>
+        {application['comments']}
       </div>
     </div>
   )
