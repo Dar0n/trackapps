@@ -28,14 +28,14 @@ class Job(models.Model):
     REJECTED = 'Rejected'
     WISHLIST = 'Wishlist'
     PHONE_INTERVIEW = 'Phone interview'
-    LIVE_INTERVIEW = 'Live interview'
+    OFFICE_INTERVIEW = 'Office interview'
     OFFER = 'Offer'
     state_options = (
         (APPLIED, 'Applied'),
         (REJECTED, 'Rejected'),
         (WISHLIST, 'Wishlist'),
         (PHONE_INTERVIEW, 'Phone interview'),
-        (LIVE_INTERVIEW, 'Live interview'),
+        (OFFICE_INTERVIEW, 'Office interview'),
         (OFFER, 'Offer'),
     )
     application_state = models.CharField(
@@ -61,7 +61,7 @@ class Job(models.Model):
 
     class Meta:
         verbose_name = "Job description"
-        ordering = ["date_applied"]
+        ordering = ["-date_applied"]
 
     def __str__(self):
         return f'{self.title}'
