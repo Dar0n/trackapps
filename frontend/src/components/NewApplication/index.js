@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { sendNewApplication } from '../../actions/sendNewApplication';
-import { withRouter } from 'react-router-dom';
-import { removeEmptyProperties } from '../../helpers/removeEmptyProperties';
+import ApplicationForm from '../ApplicationForm';
 import './style.css';
-import { checkIfLoggedIn } from '../../helpers/checkIfLoggedIn';
-
-const mapStateToProps = (state) => {
-  return {};
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  sendNewApplication: (data) => dispatch(sendNewApplication(data))
-})
 
 class NewApplication extends Component {
   constructor(props) {
@@ -27,127 +14,26 @@ class NewApplication extends Component {
       response: '',
       comments: '',
     };
-    this.options = ['Applied', 'Rejected', 'Wishlist', 'Phone interview', 'Office interview', 'Offer']
-    this.submitAction = this.submitAction.bind(this);
+    
+    // this.submitAction = this.submitAction.bind(this);
   }
   handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
     const newState = Object.assign({}, this.State, {[key]:value});
+    // const newState = Object.assign({}, this.state);
+    newState[key] = value;
     this.setState(newState);
   }
-  async submitAction(e) {
-    e.preventDefault();
-    const newState = removeEmptyProperties(this.state, 'date_applied', 'response_date');
-    const loggedIn = checkIfLoggedIn();
-    if (loggedIn) {
-      await this.props.sendNewApplication(newState);
-      this.props.history.push('/');
-    }
-    else {
-      alert('Sorry, your session has been expired. Your last application has not been added.')
-      this.props.history.push('/');
-    }
-  }
   render() {
-    const rand = require("random-key");
     return (
-      <div className='new-application-form-container'>
-        <form className='new-application-form' onSubmit={this.submitAction}>
-        <div className='new-application-form__buttons'>
-          <Link to='/' className='new-application-form__cancel-button'>Cancel</Link>
-          <input type='submit' value='Create' className='new-application-form__submit-button' />
-        </div>
-        <div className="new-application-form__field-container">
-          <label htmlFor="company">Enter company name:* </label>
-          <input 
-            onChange={this.handleChange} 
-            value={this.state.company} 
-            type="text" name="company" 
-            id="company" 
-            required 
-          />
-        </div>
-        <div className="new-application-form__field-container">
-          <label htmlFor="title">Enter job title:* </label>
-          <input 
-            onChange={this.handleChange} 
-            value={this.state.title} 
-            type="text" 
-            name="title" 
-            id="title" 
-            required 
-          />
-        </div>
-        {/* TODO: add form validation for safari and IE or/and provide calendar picker */}
-        <div className="new-application-form__field-container">
-          <label htmlFor="date_applied">Date applied: </label>
-          <input 
-            onChange={this.handleChange} 
-            value={this.state.date_applied} 
-            type="date" 
-            id="date_applied" 
-            name="date_applied"
-            min="2010-01-01" 
-            max="2028-12-31" 
-          />
-        </div>
-        <div className="new-application-form__field-container">
-          <label htmlFor="application_state">Status of the application:* </label>
-          <select name='application_state' id='application_state' onChange={this.handleChange} >
-            {
-              this.options.map(option => {
-                return <option key={rand.generate(10)} value={option}>{option}</option>;
-              })
-            }
-          </select>
-          {/* <input 
-            onChange={this.handleChange} 
-            value={this.state.application_state} 
-            type="text"
-            name="application_state" 
-            id="application_state" 
-            required 
-          /> */}
-        </div>
-        <div className="new-application-form__field-container">
-          <label htmlFor="response_date">Date of response: </label>
-          <input 
-            onChange={this.handleChange} 
-            value={this.state.response_date} 
-            type="date" 
-            id="response_date" 
-            name="response_date"
-            min="2010-01-01" 
-            max="2028-12-31" 
-          />
-        </div>
-        <div className="new-application-form__field-container new-application-form__field-container-response">
-          <label htmlFor="response">Response message: </label>
-          <textarea 
-            onChange={this.handleChange} 
-            value={this.state.response} 
-            type="text" 
-            name="response" 
-            id="response" 
-            rows='5' 
-          />
-        </div>
-        <div className="new-application-form__field-container new-application-form__field-container-comments">
-          <label htmlFor="comments">Additional comments: </label>
-          <textarea 
-          onChange={this.handleChange} 
-          value={this.state.comments} 
-          type="text" 
-          name="comments" 
-          id="comments" 
-          rows='5' 
-        />
-        </div>
-        </form>
-      </div>
+      
+      <ApplicationForm 
+        handleChange={this.handleChange}
+        payload={this.state}
+      />
     )
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewApplication));
+export default NewApplication;
