@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ApplicationForm from '../ApplicationForm';
+import ErrorPage from '../ErrorPage';
+import { checkIfLoggedIn } from '../../helpers/checkIfLoggedIn';
 import './style.css';
 
 class NewApplication extends Component {
@@ -26,12 +28,14 @@ class NewApplication extends Component {
     this.setState(newState);
   }
   render() {
+    const loggedIn = checkIfLoggedIn();
     return (
-      
+      loggedIn ? 
       <ApplicationForm 
         handleChange={this.handleChange}
         payload={this.state}
       />
+      : <ErrorPage reason={'unauthorisedAccess'}/>
     )
   }
 }
