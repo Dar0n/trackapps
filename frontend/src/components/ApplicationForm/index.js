@@ -42,6 +42,7 @@ class ApplicationForm extends Component {
   }
   render() {
     const rand = require("random-key");
+    console.log(this.props);
     return (
       <div className='new-application-form-container'>
         <form className='new-application-form' onSubmit={this.submitAction}>

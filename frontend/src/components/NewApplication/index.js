@@ -8,13 +8,19 @@ class NewApplication extends Component {
   constructor(props) {
     super(props);
     this.state={
-      company: '',
-      title: '',
-      date_applied: '',
-      application_state: 'Applied',
-      response_date: '',
-      response: '',
-      comments: '',
+      form: {
+        company: '',
+        title: '',
+        date_applied: '',
+        application_state: 'Applied',
+        response_date: '',
+        response: '',
+        comments: '',
+      },
+      // initiate loggedIn with string 'waiting'
+      // until loggedIn === 'waiting', display empty div. 
+      //Once we get a value true or false, update view with correct component
+      loggedIn: 'waiting',
     };
     
     // this.submitAction = this.submitAction.bind(this);
@@ -22,18 +28,22 @@ class NewApplication extends Component {
   handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
-    const newState = Object.assign({}, this.State, {[key]:value});
-    // const newState = Object.assign({}, this.state);
-    newState[key] = value;
-    this.setState(newState);
+    const newForm = Object.assign({}, this.state.form);
+    newForm[key] = value;
+    this.setState({form: newForm});
+  }
+  async componentDidMount() {
+    const loggedIn = await checkIfLoggedIn();
+    this.setState({loggedIn});
   }
   render() {
-    const loggedIn = checkIfLoggedIn();
     return (
-      loggedIn ? 
+      this.state.loggedIn === 'waiting' ? 
+      <div></div>
+      : this.state.loggedIn ?
       <ApplicationForm 
         handleChange={this.handleChange}
-        payload={this.state}
+        payload={this.state.form}
       />
       : <ErrorPage reason={'unauthorisedAccess'}/>
     )
