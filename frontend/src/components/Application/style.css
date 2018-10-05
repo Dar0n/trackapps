@@ -13,20 +13,46 @@
 
 .single-application__header {
   grid-row: 1/4;
-  background-color: red;
+  background: rgb(174, 0, 5);
+  background: radial-gradient(circle, rgba(174, 0, 5,0.6) 0, rgb(150, 0, 25) 70%);
+  background-position: 0px -30px;
   position: relative;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
 }
+
+
 
 .single-application__header__company,
 .single-application__header__title {
   position: relative;
-  top: 50%;
+  top: 65%;
   text-align: center;
   color: #fff;
 }
 
+.single-application__header__logo {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+
+.svg {
+  width: 35%;
+  height: auto;
+  position: absolute;
+  top: -60%;
+  left: 32.5%;
+}
+
 .single-application__header__title {
-  top: 60%;
+  top: 70%;
+}
+
+.single-application__header__logo__letter {
+  font-size: 2em;
+  text-align: center;
+  color: #fff;
 }
 
 .single-application__comments, .single-application__response {
