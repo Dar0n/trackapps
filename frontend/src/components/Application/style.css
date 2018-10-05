@@ -1,7 +1,8 @@
 .single-application-container {
   margin: 30px auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
   border-radius: 7px;
   border: 1px solid #ddd;
   /* border: 2px solid rgba(102, 102, 102, 0.5); */
@@ -10,8 +11,26 @@
   /* box-shadow: 1px 1px 5px 2px #bbb; */
 }
 
+.single-application__header {
+  grid-row: 1/4;
+  background-color: red;
+  position: relative;
+}
+
+.single-application__header__company,
+.single-application__header__title {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  color: #fff;
+}
+
+.single-application__header__title {
+  top: 60%;
+}
+
 .single-application__comments, .single-application__response {
-  grid-column: 1/4;
+  grid-column: 2/4;
 }
 
 .single-application__form-field {

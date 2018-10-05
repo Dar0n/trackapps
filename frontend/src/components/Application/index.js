@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ApplicationHeader from './ApplicationHeader';
 import './style.css';
 
 class Application extends Component{
@@ -9,14 +10,18 @@ class Application extends Component{
   const { application } = this.props;
   return (
     <div className='single-application-container'>
-      <div className={`single-application__form-field single-application__company`}>
+    <ApplicationHeader 
+      company={application['company']}
+      title={application['title']}  
+    />
+      {/* <div className={`single-application__form-field single-application__company`}>
         <span className='single-application__form-field-title'>Company</span>
         {application['company']}
       </div>
       <div className={`single-application__form-field single-application__title`}>
         <span className='single-application__form-field-title'>Job title</span>
         {application['title']}
-      </div>
+      </div> */}
       <div className={`single-application__form-field single-application__date_applied`}>
         <span className='single-application__form-field-title'>Application date</span>
         {application['date_applied']}
