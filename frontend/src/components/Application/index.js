@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ApplicationHeader from './ApplicationHeader';
+import { generateColors } from '../../helpers/generateColors';
 import './style.css';
 
 class Application extends Component{
@@ -8,20 +9,14 @@ class Application extends Component{
   }
   render() {
   const { application } = this.props;
+  const {r, g, b} = generateColors();
   return (
     <div className='single-application-container'>
-    <ApplicationHeader 
-      company={application['company']}
-      title={application['title']}  
-    />
-      {/* <div className={`single-application__form-field single-application__company`}>
-        <span className='single-application__form-field-title'>Company</span>
-        {application['company']}
-      </div>
-      <div className={`single-application__form-field single-application__title`}>
-        <span className='single-application__form-field-title'>Job title</span>
-        {application['title']}
-      </div> */}
+      <ApplicationHeader 
+        company={application['company']}
+        title={application['title']}
+        colors={[r, g, b]}
+      />
       <div className={`single-application__form-field single-application__date_applied`}>
         <span className='single-application__form-field-title'>Application date</span>
         {application['date_applied']}
@@ -34,6 +29,11 @@ class Application extends Component{
         <span className='single-application__form-field-title'>Response date</span>
         {application['response_date']}
       </div>
+      <div 
+        className='single-application__stripe' 
+        data-description='This is a decoration element.'
+        style={{backgroundColor: `rgb(${r},${g},${b}`}}
+      ></div>
       <div className={`single-application__form-field single-application__response`}>
         <span className='single-application__form-field-title'>Response</span>
         {application['response']}
