@@ -3,6 +3,7 @@ import MainNav from '../MainNav';
 import ApplicationsContainer from '../ApplicationsContainer';
 import Login from '../Login';
 import NewApplication from '../NewApplication';
+import EditApplication from '../EditApplication';
 import { Switch, Route } from 'react-router-dom';
 import './style.css';
 
@@ -17,6 +18,7 @@ class App extends Component {
               <MainNav>
                 <Route exact path="/" component={ApplicationsContainer}/>
                 <Route path='/new-application' component={NewApplication} />
+                <Route path='/edit-application/:id' component={EditApplication} />
               </MainNav>
             </Switch>
           </main>

@@ -30,11 +30,11 @@ class NewApplication extends Component {
     const value = e.target.value;
     const newForm = Object.assign({}, this.state.form);
     newForm[key] = value;
-    this.setState({form: newForm});
+    this.setState({ form: newForm });
   }
   async componentDidMount() {
     const loggedIn = await checkIfLoggedIn();
-    this.setState({loggedIn});
+    this.setState({ loggedIn });
   }
   render() {
     return (
@@ -42,8 +42,9 @@ class NewApplication extends Component {
       <div></div>
       : this.state.loggedIn ?
       <ApplicationForm 
-        handleChange={this.handleChange}
-        payload={this.state.form}
+        handleChange={ this.handleChange }
+        payload={ this.state.form }
+        isNewApplication={ true }
       />
       : <ErrorPage reason={'unauthorisedAccess'}/>
     )

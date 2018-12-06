@@ -27,9 +27,13 @@ class ApplictionsDashboard extends Component {
     }
   }
 
+  removeApplicationByID = (id) => {
+    const newApplications = this.state.applications.filter(application => application.id !== id);
+    this.setState({ applications: newApplications });
+  }
+
   async componentDidMount () {
     await this.props.getJobsApplications();
-    console.log(this.props);
     this.setState({applications: this.props.applications});
   }
   render() {
@@ -38,7 +42,11 @@ class ApplictionsDashboard extends Component {
       <div className='applications-dashboard-container'>
         {
           this.state.applications.map(application => {
-            return <Application key={rand.generate(10)} application={application} />;
+            return <Application 
+              key={rand.generate(10)} 
+              application={application} 
+              removeApplicationByID={ this.removeApplicationByID }
+            />;
           })
         }
       </div>

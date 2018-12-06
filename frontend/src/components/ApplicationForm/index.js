@@ -5,14 +5,15 @@ import { sendNewApplication } from '../../actions/sendNewApplication';
 import { withRouter } from 'react-router-dom';
 import { removeEmptyProperties } from '../../helpers/removeEmptyProperties';
 import { checkIfLoggedIn } from '../../helpers/checkIfLoggedIn';
-
+import { updateApplication } from '../../actions/updateApplication';
 
 const mapStateToProps = (state) => {
   return {};
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  sendNewApplication: (data) => dispatch(sendNewApplication(data))
+  sendNewApplication: (data) => dispatch(sendNewApplication(data)),
+  updateApplication: (jobID, newData) => dispatch(updateApplication(jobID, newData)),
 })
 
 
@@ -20,7 +21,6 @@ class ApplicationForm extends Component {
   constructor(props){
     super(props);
     this.submitAction = this.submitAction.bind(this);
-    this.options = ['Applied', 'Rejected', 'Wishlist', 'Phone interview', 'Office interview', 'Offer']
   }
 
   handleChange = (e) => {
@@ -29,10 +29,17 @@ class ApplicationForm extends Component {
   
   async submitAction(e) {
     e.preventDefault();
+    // Removing empty string dates, because database doesn't accept these fields as empty strings.
     const newState = removeEmptyProperties(this.props.payload, 'date_applied', 'response_date');
     const loggedIn = checkIfLoggedIn();
     if (loggedIn) {
-      await this.props.sendNewApplication(newState);
+      if (this.props.isNewApplication) {
+        await this.props.sendNewApplication(newState);
+      }
+      else {
+        console.log('new State>>>>', newState);
+        await this.props.updateApplication(this.props.jobID, newState);
+      }
       this.props.history.push('/');
     }
     else {
@@ -43,18 +50,19 @@ class ApplicationForm extends Component {
   render() {
     const rand = require("random-key");
     console.log(this.props);
+    const options = ['Applied', 'Rejected', 'Wishlist', 'Phone interview', 'Office interview', 'Offer'];
     return (
       <div className='new-application-form-container'>
         <form className='new-application-form' onSubmit={this.submitAction}>
         <div className='new-application-form__buttons'>
           <Link to='/' className='new-application-form__cancel-button'>Cancel</Link>
-          <input type='submit' value='Create' className='new-application-form__submit-button' />
+          <input type='submit' value={ this.props.isNewApplication ? 'Create' : 'Save' } className='new-application-form__submit-button' />
         </div>
         <div className="new-application-form__field-container">
           <label htmlFor="company">Enter company name:* </label>
           <input 
             onChange={this.handleChange} 
-            value={this.props.payload.company} 
+            value={ !this.props.payload.company ? '' : this.props.payload.company } 
             type="text" name="company" 
             id="company" 
             required 
@@ -64,7 +72,7 @@ class ApplicationForm extends Component {
           <label htmlFor="title">Enter job title:* </label>
           <input 
             onChange={this.handleChange} 
-            value={this.props.payload.title} 
+            value={ !this.props.payload.title ? '' : this.props.payload.title } 
             type="text" 
             name="title" 
             id="title" 
@@ -76,7 +84,7 @@ class ApplicationForm extends Component {
           <label htmlFor="date_applied">Date applied: </label>
           <input 
             onChange={this.handleChange} 
-            value={this.props.payload.date_applied} 
+            value={ !this.props.payload.date_applied ? '' : this.props.payload.date_applied} 
             type="date" 
             id="date_applied" 
             name="date_applied"
@@ -86,9 +94,9 @@ class ApplicationForm extends Component {
         </div>
         <div className="new-application-form__field-container">
           <label htmlFor="application_state">Status of the application:* </label>
-          <select name='application_state' id='application_state' onChange={this.handleChange} value={this.props.payload.application_state}>
+          <select name='application_state' id='application_state' onChange={this.handleChange} value={ !this.props.payload.application_state ? '' : this.props.payload.application_state }>
             {
-              this.options.map(option => {
+              options.map(option => {
                 return <option key={rand.generate(10)}>{option}</option>;
               })
             }
@@ -98,7 +106,7 @@ class ApplicationForm extends Component {
           <label htmlFor="response_date">Date of response: </label>
           <input 
             onChange={this.handleChange} 
-            value={this.props.payload.response_date} 
+            value={ !this.props.payload.response_date ? '' : this.props.payload.response_date }
             type="date" 
             id="response_date" 
             name="response_date"
@@ -110,7 +118,7 @@ class ApplicationForm extends Component {
           <label htmlFor="response">Response message: </label>
           <textarea 
             onChange={this.handleChange} 
-            value={this.props.payload.response} 
+            value={ !this.props.payload.response ? '' : this.props.payload.response } 
             type="text" 
             name="response" 
             id="response" 
@@ -121,7 +129,7 @@ class ApplicationForm extends Component {
           <label htmlFor="comments">Additional comments: </label>
           <textarea 
           onChange={this.handleChange} 
-          value={this.props.payload.comments} 
+          value={ !this.props.payload.comments ? '' : this.props.payload.comments } 
           type="text" 
           name="comments" 
           id="comments" 
